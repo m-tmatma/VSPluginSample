@@ -85,12 +85,20 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print to Output Window
+        /// </summary>
+        internal void OutputString(string output)
+        {
+            var outPutPane = this.package.OutputPane;
+            outPutPane.OutputString(output + Environment.NewLine);
+        }
+
+        /// <summary>
         /// Print separater
         /// </summary>
         internal void PrintSeparater()
         {
-            var outPutPane = this.package.OutputPane;
-            outPutPane.OutputString(new string('-', 80) + Environment.NewLine);
+            this.OutputString(new string('-', 80) + Environment.NewLine);
         }
 
         /// <summary>
@@ -99,23 +107,22 @@ namespace VSPluginSample
         internal void PrintActiveDocument()
         {
             var dte = this.package.GetDTE();
-            var outPutPane = this.package.OutputPane;
             try
             {
                 var doument = dte.ActiveDocument;
                 if (doument != null)
                 {
                     var filename = doument.FullName;
-                    outPutPane.OutputString(filename + Environment.NewLine);
+                    this.OutputString(filename + Environment.NewLine);
                 }
                 else
                 {
-                    outPutPane.OutputString("There is no active document" + Environment.NewLine);
+                    this.OutputString("There is no active document" + Environment.NewLine);
                 }
             }
             catch (ArgumentException)
             {
-                outPutPane.OutputString("There is no active document" + Environment.NewLine);
+                this.OutputString("There is no active document" + Environment.NewLine);
             }
         }
 
@@ -125,12 +132,11 @@ namespace VSPluginSample
         internal void PrintProjects()
         {
             var dte = this.package.GetDTE();
-            var outPutPane = this.package.OutputPane;
 
             // enumerate Projects 
             foreach (EnvDTE.Project project in dte.Solution)
             {
-                outPutPane.OutputString(project.Name + ": " + project.FullName + Environment.NewLine);
+                this.OutputString(project.Name + ": " + project.FullName + Environment.NewLine);
             }
         }
 
