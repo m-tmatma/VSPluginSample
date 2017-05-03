@@ -85,6 +85,25 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print active document
+        /// </summary>
+        internal void PrintActiveDocument()
+        {
+            var dte = this.package.GetDTE();
+            var outPutPane = this.package.OutputPane;
+            var doument = dte.ActiveDocument;
+            if (doument != null)
+            {
+                var filename = doument.FullName;
+                outPutPane.OutputString(filename + Environment.NewLine);
+            }
+            else
+            {
+                outPutPane.OutputString("There is no active document" + Environment.NewLine);
+            }
+        }
+
+        /// <summary>
         /// This function is the callback used to execute the command when the menu item is clicked.
         /// See the constructor to see how the menu item is associated with this function using
         /// OleMenuCommandService service and MenuCommand class.
@@ -93,8 +112,8 @@ namespace VSPluginSample
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            // print test message to OutputWindow
-            this.package.OutputPane.OutputString("Test" + Environment.NewLine);
+            // print about Active Document
+            PrintActiveDocument();
         }
     }
 }
