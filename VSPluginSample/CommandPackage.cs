@@ -96,7 +96,7 @@ namespace VSPluginSample
         /// </summary>
         protected override void Initialize()
         {
-        	// Add an item to OutputWindow
+            // Add an item to OutputWindow
             AddOutputWindow("command window");
 
             Command.Initialize(this);
