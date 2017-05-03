@@ -85,6 +85,15 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print separater
+        /// </summary>
+        internal void PrintSeparater()
+        {
+            var outPutPane = this.package.OutputPane;
+            outPutPane.OutputString(new string('-', 80) + Environment.NewLine);
+        }
+
+        /// <summary>
         /// Print active document
         /// </summary>
         internal void PrintActiveDocument()
@@ -119,6 +128,13 @@ namespace VSPluginSample
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
+            // activate Output Window
+            var outPutPane = this.package.OutputPane;
+            outPutPane.Activate();
+
+            // print separater
+            PrintSeparater();
+
             // print about Active Document
             PrintActiveDocument();
         }
