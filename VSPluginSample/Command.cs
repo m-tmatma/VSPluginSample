@@ -120,6 +120,21 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print Projects
+        /// </summary>
+        internal void PrintProjects()
+        {
+            var dte = this.package.GetDTE();
+            var outPutPane = this.package.OutputPane;
+
+            // enumerate Projects 
+            foreach (EnvDTE.Project project in dte.Solution)
+            {
+                outPutPane.OutputString(project.Name + ": " + project.FullName + Environment.NewLine);
+            }
+        }
+
+        /// <summary>
         /// This function is the callback used to execute the command when the menu item is clicked.
         /// See the constructor to see how the menu item is associated with this function using
         /// OleMenuCommandService service and MenuCommand class.
@@ -137,6 +152,12 @@ namespace VSPluginSample
 
             // print about Active Document
             PrintActiveDocument();
+
+            // print separater
+            PrintSeparater();
+
+            // print Projects
+            PrintProjects();
         }
     }
 }
