@@ -147,6 +147,9 @@ namespace VSPluginSample
             var outPutPane = this.package.OutputPane;
             outPutPane.Activate();
 
+            // clear Output Window
+            outPutPane.Clear();
+
             // print separater
             PrintSeparater();
 
