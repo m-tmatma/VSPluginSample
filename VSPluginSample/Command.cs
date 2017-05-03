@@ -30,14 +30,14 @@ namespace VSPluginSample
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
-        private readonly Package package;
+        private readonly CommandPackage package;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Command"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        private Command(Package package)
+        private Command(CommandPackage package)
         {
             if (package == null)
             {
@@ -79,7 +79,7 @@ namespace VSPluginSample
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        public static void Initialize(Package package)
+        public static void Initialize(CommandPackage package)
         {
             Instance = new Command(package);
         }
@@ -93,17 +93,8 @@ namespace VSPluginSample
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "Command";
-
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.ServiceProvider,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            // print test message to OutputWindow
+            this.package.OutputPane.OutputString("Test" + Environment.NewLine);
         }
     }
 }

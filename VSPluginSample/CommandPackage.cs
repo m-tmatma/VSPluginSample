@@ -58,6 +58,36 @@ namespace VSPluginSample
             // initialization is the Initialize method.
         }
 
+        /// <summary>
+        /// Get DTE Object
+        /// </summary>
+        public EnvDTE.DTE GetDTE()
+        {
+            return (EnvDTE.DTE)GetService(typeof(SDTE));
+        }
+
+        /// <summary>
+        /// Get OutputWindow
+        /// </summary>
+        public EnvDTE.Window GetOutputWindow(EnvDTE.DTE dte)
+        {
+            return dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
+        }
+
+        /// <summary>
+        /// Add an item to OutputWindow
+        /// </summary>
+        public void AddOutputWindow(string paneName)
+        {
+            var outputWindow = (EnvDTE.OutputWindow)GetOutputWindow(GetDTE()).Object;
+            this.OutputPane = outputWindow.OutputWindowPanes.Add(paneName);
+        }
+
+        /// <summary>
+        /// Property For OutputWindow
+        /// </summary>
+        public EnvDTE.OutputWindowPane OutputPane{ get; private set; }
+
         #region Package Members
 
         /// <summary>
@@ -66,6 +96,9 @@ namespace VSPluginSample
         /// </summary>
         protected override void Initialize()
         {
+        	// Add an item to OutputWindow
+            AddOutputWindow("command window");
+
             Command.Initialize(this);
             base.Initialize();
         }
