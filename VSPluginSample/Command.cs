@@ -91,13 +91,20 @@ namespace VSPluginSample
         {
             var dte = this.package.GetDTE();
             var outPutPane = this.package.OutputPane;
-            var doument = dte.ActiveDocument;
-            if (doument != null)
+            try
             {
-                var filename = doument.FullName;
-                outPutPane.OutputString(filename + Environment.NewLine);
+                var doument = dte.ActiveDocument;
+                if (doument != null)
+                {
+                    var filename = doument.FullName;
+                    outPutPane.OutputString(filename + Environment.NewLine);
+                }
+                else
+                {
+                    outPutPane.OutputString("There is no active document" + Environment.NewLine);
+                }
             }
-            else
+            catch (ArgumentException)
             {
                 outPutPane.OutputString("There is no active document" + Environment.NewLine);
             }
