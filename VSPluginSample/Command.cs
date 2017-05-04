@@ -9,6 +9,7 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using System.Collections.Generic;
 
 namespace VSPluginSample
 {
@@ -127,16 +128,44 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// get child projects from Solution recursively
+        /// </summary>
+        internal List<EnvDTE.Project> GetChildProjects(EnvDTE.Project project)
+        {
+            List<EnvDTE.Project> projects = new List<EnvDTE.Project>();
+            projects.Add(project);
+
+            foreach (EnvDTE.ProjectItem projectItem in project.ProjectItems)
+            {
+                var subProject = projectItem.SubProject;
+                if (subProject != null)
+                {
+                    List<EnvDTE.Project> subProjctes = GetChildProjects(projectItem.SubProject);
+                    projects.AddRange(subProjctes);
+                }
+            }
+            return projects;
+        }
+
+        /// <summary>
         /// Print Projects
         /// </summary>
         internal void PrintProjects()
         {
+            const string SolutionFolder = EnvDTE.Constants.vsProjectKindSolutionItems; // solution folder
             var dte = this.package.GetDTE();
 
             // enumerate Projects 
-            foreach (EnvDTE.Project project in dte.Solution)
+            foreach (EnvDTE.Project topProject in dte.Solution)
             {
-                this.OutputString(project.Name + ": " + project.FullName + Environment.NewLine);
+                List<EnvDTE.Project> projects = GetChildProjects(topProject);
+                foreach (EnvDTE.Project project in projects)
+                {
+                    if (project.Kind != SolutionFolder)
+                    {
+                        OutputString(project.Name + ": " + project.FullName + Environment.NewLine);
+                    }
+                }
             }
         }
 
@@ -165,7 +194,7 @@ namespace VSPluginSample
             // print separater
             PrintSeparater();
 
-            // print Projects
+            // print Projects including sub projects
             PrintProjects();
         }
     }
