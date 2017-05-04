@@ -140,7 +140,7 @@ namespace VSPluginSample
                 var subProject = projectItem.SubProject;
                 if (subProject != null)
                 {
-                    List<EnvDTE.Project> subProjctes = GetChildProjects(projectItem.SubProject);
+                    List<EnvDTE.Project> subProjctes = GetChildProjects(subProject);
                     projects.AddRange(subProjctes);
                 }
             }
