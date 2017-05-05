@@ -39,6 +39,26 @@
       <Group guid="guidCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS" />
       </Group>
+
+      <!-- Show Context Menu at Project Item -->
+      <Group guid="guidCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
+
+      <!-- Show Context Menu at Project  -->
+      <Group guid="guidCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+      </Group>
+
+      <!-- Show Context Menu at Code Editor -->
+      <Group guid="guidCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+      </Group>
+
+      <!-- Show Context Menu at Folder in Project -->
+      <Group guid="guidCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_FOLDERNODE"/>
+      </Group>
     </Groups>
 
     <!--Buttons section. -->
@@ -62,8 +82,12 @@
       <Button guid="guidCommandPackageCmdSet" id="cmdidSelectionCommand" priority="0x0100" type="Button">
         <Parent guid="guidCommandPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages1" id="bmpPic1" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Invoke SelectionCommand</ButtonText>
+          <LocCanonicalName>Invoke SelectionCommand</LocCanonicalName>
         </Strings>
       </Button>
     </Buttons>
@@ -88,7 +112,7 @@
     <GuidSymbol name="guidCommandPackageCmdSet" value="{bab231d0-d39b-489b-920c-98e6b23e005a}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="CommandId" value="0x0100" />
-      <IDSymbol value="4129" name="cmdidSelectionCommand" />
+      <IDSymbol name="cmdidSelectionCommand" value="4129" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{5cbec8bb-e054-4f32-a604-035a2cf0478a}">
