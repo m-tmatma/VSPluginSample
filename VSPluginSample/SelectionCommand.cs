@@ -119,6 +119,12 @@ namespace VSPluginSample
                 string text = selection.Text;
 
                 OutputStringLine(text);
+
+                OutputStringLine("FullName: " + dte.ActiveDocument.FullName);
+                OutputStringLine("IsEmpty: " + selection.IsEmpty);
+                OutputStringLine("CurrentLine: " + selection.CurrentLine);
+                OutputStringLine("TopLine: " + selection.TopLine);
+                OutputStringLine("BottomLine: " + selection.BottomLine);
             }
         }
     }
