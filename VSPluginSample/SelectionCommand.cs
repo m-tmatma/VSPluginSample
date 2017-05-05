@@ -94,6 +94,14 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print to Output Window with Line Ending
+        /// </summary>
+        internal void OutputStringLine(string output)
+        {
+            OutputString(output + Environment.NewLine);
+        }
+
+        /// <summary>
         /// This function is the callback used to execute the command when the menu item is clicked.
         /// See the constructor to see how the menu item is associated with this function using
         /// OleMenuCommandService service and MenuCommand class.
@@ -110,7 +118,7 @@ namespace VSPluginSample
                 var selection = (EnvDTE.TextSelection)dte.ActiveDocument.Selection;
                 string text = selection.Text;
 
-                OutputString(text);
+                OutputStringLine(text);
             }
         }
     }

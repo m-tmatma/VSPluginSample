@@ -95,11 +95,19 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print to Output Window with Line Ending
+        /// </summary>
+        internal void OutputStringLine(string output)
+        {
+            OutputString(output + Environment.NewLine);
+        }
+
+        /// <summary>
         /// Print separater
         /// </summary>
         internal void PrintSeparater()
         {
-            this.OutputString(new string('-', 80) + Environment.NewLine);
+            this.OutputStringLine(new string('-', 80));
         }
 
         /// <summary>
@@ -114,16 +122,16 @@ namespace VSPluginSample
                 if (doument != null)
                 {
                     var filename = doument.FullName;
-                    this.OutputString(filename + Environment.NewLine);
+                    this.OutputStringLine(filename);
                 }
                 else
                 {
-                    this.OutputString("There is no active document" + Environment.NewLine);
+                    this.OutputStringLine("There is no active document");
                 }
             }
             catch (ArgumentException)
             {
-                this.OutputString("There is no active document" + Environment.NewLine);
+                this.OutputStringLine("There is no active document");
             }
         }
 
@@ -163,7 +171,7 @@ namespace VSPluginSample
                 {
                     if (project.Kind != SolutionFolder)
                     {
-                        OutputString(project.Name + ": " + project.FullName + Environment.NewLine);
+                        OutputStringLine(project.Name + ": " + project.FullName);
                     }
                 }
             }
