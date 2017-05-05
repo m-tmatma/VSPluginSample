@@ -101,6 +101,7 @@ namespace VSPluginSample
 
             Command.Initialize(this);
             base.Initialize();
+            SelectionCommand.Initialize(this);
         }
 
         #endregion
