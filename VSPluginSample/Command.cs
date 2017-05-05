@@ -91,7 +91,7 @@ namespace VSPluginSample
         internal void OutputString(string output)
         {
             var outPutPane = this.package.OutputPane;
-            outPutPane.OutputString(output + Environment.NewLine);
+            outPutPane.OutputString(output);
         }
 
         /// <summary>
