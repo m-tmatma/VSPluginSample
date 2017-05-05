@@ -85,6 +85,15 @@ namespace VSPluginSample
         }
 
         /// <summary>
+        /// Print to Output Window
+        /// </summary>
+        internal void OutputString(string output)
+        {
+            var outPutPane = this.package.OutputPane;
+            outPutPane.OutputString(output + Environment.NewLine);
+        }
+
+        /// <summary>
         /// This function is the callback used to execute the command when the menu item is clicked.
         /// See the constructor to see how the menu item is associated with this function using
         /// OleMenuCommandService service and MenuCommand class.
@@ -94,16 +103,15 @@ namespace VSPluginSample
         private void MenuItemCallback(object sender, EventArgs e)
         {
             string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "SelectionCommand";
+            var dte = this.package.GetDTE();
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.ServiceProvider,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            if (dte.ActiveDocument != null)
+            {
+                var selection = (EnvDTE.TextSelection)dte.ActiveDocument.Selection;
+                string text = selection.Text;
+
+                OutputString(text);
+            }
         }
     }
 }
