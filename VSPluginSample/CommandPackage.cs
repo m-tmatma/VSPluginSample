@@ -100,8 +100,8 @@ namespace VSPluginSample
             AddOutputWindow("command window");
 
             Command.Initialize(this);
-            base.Initialize();
             SelectionCommand.Initialize(this);
+            base.Initialize();
         }
 
         #endregion

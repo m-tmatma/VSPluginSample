@@ -30,14 +30,14 @@ namespace VSPluginSample
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
-        private readonly Package package;
+        private readonly CommandPackage package;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectionCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        private SelectionCommand(Package package)
+        private SelectionCommand(CommandPackage package)
         {
             if (package == null)
             {
@@ -79,7 +79,7 @@ namespace VSPluginSample
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        public static void Initialize(Package package)
+        public static void Initialize(CommandPackage package)
         {
             Instance = new SelectionCommand(package);
         }
